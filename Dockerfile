@@ -9,7 +9,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt update && apt install -y \
     zip unzip zlib1g-dev libpng-dev libzip-dev libxml2-dev \
     cron && \
-    docker-php-ext-install pdo pdo_mysql pdo_pgsql gd soap zip intl
+    docker-php-ext-install pdo pdo_mysql gd soap zip intl
 
 # Habilitar mod_rewrite
 RUN a2enmod rewrite
