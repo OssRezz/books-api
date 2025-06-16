@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\auth;
+namespace App\Http\Requests\books;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class AuthRequest extends FormRequest
+class UpdateBookRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,13 @@ class AuthRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email|exists:users,email',
-            'password' => 'required',
+            'title' => 'required|string|max:255',
+            'author_id' => 'required|exists:authors,id',
+            'isbn' => 'required|string|size:13|unique:books,isbn,' . $this->route('book'),
+            'publication_year' => 'required|digits:4|integer|min:1500|max:' . now()->year,
+            'book_status_id' => 'required|exists:book_statuses,id',
+            'image_book' => 'nullable|image|mimes:jpeg,png,jpg,svg,heic,webp|max:10240',
+            'image' => '',
         ];
     }
 
@@ -33,7 +38,7 @@ class AuthRequest extends FormRequest
         throw new HttpResponseException(response()->json([
             'message' => 'Validation errors',
             'success' => false,
-            'errors' => $validator->errors(),
+            'data' => $validator->errors(),
         ], 422));
     }
 }

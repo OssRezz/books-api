@@ -3,7 +3,7 @@
 
 
 <aside>
-    <strong>Base URL</strong>: <code>http://books-api.test/</code>
+    <strong>Base URL</strong>: <code>http://localhost:8081/books-api/public/</code>
 </aside>
 
     This documentation aims to provide all the information you need to work with our API.

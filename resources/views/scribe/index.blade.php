@@ -26,7 +26,7 @@
             </style>
 
     <script>
-        var tryItOutBaseUrl = "http://books-api.test/";
+        var tryItOutBaseUrl = "http://localhost:8081/books-api/public/";
         var useCsrf = Boolean();
         var csrfUrl = "/sanctum/csrf-cookie";
     </script>
@@ -85,7 +85,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: June 13, 2025</li>
+        <li>Last updated: June 14, 2025</li>
     </ul>
 </div>
 
@@ -94,7 +94,7 @@
     <div class="content">
         <h1 id="introduction">Introduction</h1>
 <aside>
-    <strong>Base URL</strong>: <code>http://books-api.test/</code>
+    <strong>Base URL</strong>: <code>http://localhost:8081/books-api/public/</code>
 </aside>
 <pre><code>This documentation aims to provide all the information you need to work with our API.
 
@@ -121,7 +121,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://books-api.test/api/v1/login" \
+    "http://localhost:8081/books-api/public/api/v1/login" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -133,7 +133,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://books-api.test/api/v1/login"
+    "http://localhost:8081/books-api/public/api/v1/login"
 );
 
 const headers = {

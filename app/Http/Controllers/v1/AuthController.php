@@ -40,20 +40,21 @@ class AuthController extends Controller
     {
         $user = User::where('email', $request->email)->first();
 
-        if (!Hash::check($request->password, $user->password)) {
-            return $this->errorResponse('Contraseña incorrecta', [], 422);
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return $this->errorResponse('Your password or email is incorrect', [], 422);
         }
 
         $token = $user->createToken("auth_token")->plainTextToken;
+
         $response = [
             "id" => $user->id,
             "name" => $user->name,
-            "last_name" => $user->last_name,
             "email" => $user->email,
+            "role" => $user->getRoleNames()->first(), // Retorna el nombre del rol
             "permissions" => $user->getAllPermissions()->pluck('name'),
             "token" => $token,
         ];
 
-        return $this->successResponse('Login exitoso', $response, 200);
+        return $this->successResponse('Login successful', $response, 200);
     }
 }
