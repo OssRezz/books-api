@@ -1,5 +1,5 @@
 # Imagen base con PHP y Apache para Lendify
-FROM php:8.1-apache
+FROM php:8.2-apache
 
 # Configurar zona horaria
 ENV TZ=America/Bogota
