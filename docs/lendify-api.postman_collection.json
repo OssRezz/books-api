@@ -1,0 +1,794 @@
+{
+	"info": {
+		"_postman_id": "8dd81c2e-c011-4fac-9dee-1d97d2d3a433",
+		"name": "lendify-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18410354",
+		"_collection_link": "https://galaxia-2242.postman.co/workspace/Galaxia-Workspace~5d29d88b-195a-445e-81db-51787ca88057/collection/18410354-8dd81c2e-c011-4fac-9dee-1d97d2d3a433?action=share&source=collection_link&creator=18410354"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "admin@books.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "!Nana433550.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}v1/login",
+							"host": [
+								"{{URL}}v1"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "authors",
+			"item": [
+				{
+					"name": "get authors",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}v1/authors",
+							"host": [
+								"{{URL}}v1"
+							],
+							"path": [
+								"authors"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "book statuses",
+			"item": [
+				{
+					"name": "get statuses",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}v1/book-statuses",
+							"host": [
+								"{{URL}}v1"
+							],
+							"path": [
+								"book-statuses"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "books",
+			"item": [
+				{
+					"name": "get books",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}v1/books",
+							"host": [
+								"{{URL}}v1"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Titulo",
+									"type": "text"
+								},
+								{
+									"key": "author_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "isbn",
+									"value": "1234567891232",
+									"type": "text"
+								},
+								{
+									"key": "publication_year",
+									"value": "2025",
+									"type": "text"
+								},
+								{
+									"key": "book_status_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "image_book",
+									"type": "file",
+									"src": "/Users/ossrezz/Downloads/heljarmadr.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}v1/books",
+							"host": [
+								"{{URL}}v1"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Titulo",
+									"type": "text"
+								},
+								{
+									"key": "author_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "isbn",
+									"value": "1234567891232",
+									"type": "text"
+								},
+								{
+									"key": "publication_year",
+									"value": "2025",
+									"type": "text"
+								},
+								{
+									"key": "book_status_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "image_book",
+									"type": "file",
+									"src": "/Users/ossrezz/Downloads/heljarmadr.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}v1/books/50?_method=PUT",
+							"host": [
+								"{{URL}}v1"
+							],
+							"path": [
+								"books",
+								"50"
+							],
+							"query": [
+								{
+									"key": "_method",
+									"value": "PUT"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get book",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}v1/books/1",
+							"host": [
+								"{{URL}}v1"
+							],
+							"path": [
+								"books",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "borrowings",
+			"item": [
+				{
+					"name": "borrow  books",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "book_ids[]",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "book_ids[]",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}v1/users/1/borrowings/borrow",
+							"host": [
+								"{{URL}}v1"
+							],
+							"path": [
+								"users",
+								"1",
+								"borrowings",
+								"borrow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "return books",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "book_ids[]",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "book_ids[]",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}v1/users/1/borrowings/return",
+							"host": [
+								"{{URL}}v1"
+							],
+							"path": [
+								"users",
+								"1",
+								"borrowings",
+								"return"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get books",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}v1/borrowings/books/filter?search=978-2964538160",
+							"host": [
+								"{{URL}}v1"
+							],
+							"path": [
+								"borrowings",
+								"books",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "978-2964538160"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "get users paginated",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "admin@books.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "!Nana433550.",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}v1/users?page=1",
+							"host": [
+								"{{URL}}v1"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}v1/users-all",
+							"host": [
+								"{{URL}}v1"
+							],
+							"path": [
+								"users-all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "James Osorio Florez",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "OssRezz.13@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "library_id",
+									"value": "LIB123451231",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "James433550",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "Admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}v1/users",
+							"host": [
+								"{{URL}}v1"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "James Osorio",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "OssRezz.13@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "library_id",
+									"value": "LIB123451231",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}v1/users/3?_method=PUT",
+							"host": [
+								"{{URL}}v1"
+							],
+							"path": [
+								"users",
+								"3"
+							],
+							"query": [
+								{
+									"key": "_method",
+									"value": "PUT"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "roles",
+			"item": [
+				{
+					"name": "get roles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}v1/roles",
+							"host": [
+								"{{URL}}v1"
+							],
+							"path": [
+								"roles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "http://localhost:8081/books-api/public/api/",
+			"type": "string"
+		},
+		{
+			"key": "TOKEN",
+			"value": "1|M8fAv0sRKNrlUi7oDZ7kVwRKh4KLTsrpbsi4fS4g4dc3f535",
+			"type": "string"
+		}
+	]
+}

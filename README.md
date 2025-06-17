@@ -80,6 +80,12 @@ php artisan migrate --seed
 php artisan serve
 ```
 
+### 5(Opcional). En sistemas unix brindar permisos  a storage/ y bootstrap/
+
+```bash
+sudo chmod -R 777 storage/  bootstrap/
+```
+
 Accede desde: `http://localhost:8000`
 
 ---
@@ -119,7 +125,7 @@ El proyecto incluye archivos listos para Docker:
 docker compose up --build
 ```
 
-Ideal para entornos controlados o producción. Puedes personalizar el `docker-compose.yml` para apuntar a producción si lo necesitas.
+Docker no es usado para desarrollo, su enfoque esta orientado a servidores de producción. Al levantar la app, ingresamos por el puerto 8080
 
 ---
 
@@ -129,7 +135,6 @@ Este sistema fue desplegado en un entorno productivo utilizando un servidor **EC
 
 - Amazon Linux
 - Docker
-- MySQL como servicio gestionado (RDS)
 - **NGINX** como reverse proxy apuntando al backend
 - **Certbot** para certificado SSL con Let's Encrypt
 - **RDS** base de datos MySQL en AWS
@@ -142,7 +147,12 @@ Este sistema fue desplegado en un entorno productivo utilizando un servidor **EC
 
 Importa el archivo Postman disponible en `docs/lendify-api.postman_collection.json`.
 
-Variable global: `{{APP_URL}}` → `http://localhost:8000` o tu dominio
+Variables globals desde de la colección: 
+
+`{{URL}}` → `http://localhost:8000` o el puerto de Docker
+
+`{{TOKEN}}` → La aplicación usa `Authorization` con bearer token, una vez se haga Login, se setea en las variables de entorno de la colección
+
 
 ---
 
