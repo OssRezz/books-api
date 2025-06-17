@@ -68,7 +68,7 @@ DB_PASSWORD=
 composer install
 ```
 
-### 3. Ejecutar migraciones y seeders
+### 3. Ejecutar migraciones y seeders (Requerido crear la base de datos antes de ejecutar este comando)
 
 ```bash
 php artisan migrate --seed
@@ -90,30 +90,57 @@ Accede desde: `http://localhost:8000`
 
 ---
 
-## ✅ Testing
 
-### Configuración
+## 🧪 Testing
 
-Copia tu entorno base:
+Este proyecto cuenta con una suite completa de pruebas automatizadas utilizando **PHPUnit**, enfocadas en verificar la integridad y funcionamiento correcto de todos los módulos de la API:
+
+- Autenticación
+- Usuarios
+- Libros
+- Préstamos y devoluciones
+
+Las pruebas están organizadas dentro del directorio `tests/Feature`, y hacen uso de factories, seeders y base de datos en memoria para asegurar un entorno controlado.
+
+### ⚙️ Configuración del entorno de pruebas
+
+1. Copia el archivo de entorno principal:
 
 ```bash
 cp .env .env.testing
 ```
 
-En `.env.testing`, asegúrate de usar una base de datos separada (recomendado SQLite para velocidad):
+2. Asegúrate de configurar `.env.testing` con una base de datos separada. Se recomienda SQLite en memoria:
 
 ```env
 DB_CONNECTION=sqlite
 DB_DATABASE=:memory:
 ```
 
-### Ejecutar pruebas
+Esto asegura que los datos se eliminen automáticamente después de cada prueba.
+
+### ▶️ Ejecutar pruebas
+
+Para correr toda la suite de pruebas, ejecuta:
 
 ```bash
 php artisan test
 ```
 
-Esto ejecutará todas las pruebas de `Feature` y `Unit`, usando una base en memoria y datos falsos mediante factories y seeders.
+Laravel se encargará de preparar automáticamente la base de datos de pruebas, ejecutar migraciones y correr los tests.
+
+### 📂 Cobertura de pruebas
+
+Los tests implementados cubren los siguientes módulos y escenarios:
+
+| Módulo       | Escenarios cubiertos                                                                 |
+|--------------|----------------------------------------------------------------------------------------|
+| Auth         | Login exitoso, login fallido, acceso protegido sin token, campos faltantes           |
+| Users        | Listado de usuarios, creación, edición, eliminación                                  |
+| Books        | Listado, creación, actualización y eliminación de libros                             |
+| Borrowings   | Préstamos válidos, límite de 3 libros, retorno de libros, consulta de préstamo actual, filtros |
+
+Cada test también valida las respuestas esperadas, errores, códigos HTTP y la estructura estandarizada del JSON de salida.
 
 ---
 
