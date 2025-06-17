@@ -5,12 +5,13 @@ namespace Database\Seeders;
 use App\Models\Book;
 use App\Models\Author;
 use Illuminate\Database\Seeder;
+use Faker\Factory;
 
 class BookSeeder extends Seeder
 {
     public function run(): void
     {
-        $faker = \Faker\Factory::create();
+        $faker = Factory::create();
         $baseBooks = [
             ['Clean Code', 'Robert C. Martin', 2008],
             ['Clean Architecture', 'Robert C. Martin', 2017],
