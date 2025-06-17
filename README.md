@@ -1,6 +1,6 @@
 # 📚 Lendify API - Backend Laravel
 
-Este proyecto es una API REST desarrollada con **Laravel**, siguiendo buenas prácticas de arquitectura, validación y documentación. "Lendify" es una plataforma de préstamos de libros, diseñada para facilitar la gestión de usuarios, libros, préstamos y devoluciones.
+Este proyecto es una API REST desarrollada con **Laravel**, diseñada para gestionar préstamos de libros entre usuarios. Cuenta con funcionalidades clave como registro de usuarios, gestión de libros, préstamos, devoluciones y control de disponibilidad, todo con validaciones robustas y arquitectura organizada.
 
 ---
 
@@ -9,10 +9,10 @@ Este proyecto es una API REST desarrollada con **Laravel**, siguiendo buenas pr�
 - CRUD de usuarios y libros
 - Lógica de préstamos y devoluciones de libros
 - Validaciones robustas con `FormRequest`
-- Documentación organizada mediante Postman
-- Dockerizado para ambientes locales o productivos
-- Arquitectura limpia y mantenible (responsabilidad por capas)
-- Respuestas estandarizadas con formato uniforme
+- Estructura de respuesta estandarizada
+- Testing con PHPUnit
+- Docker para desarrollo y despliegue
+- Configuración para entornos de producción
 
 ---
 
@@ -22,7 +22,6 @@ Este proyecto es una API REST desarrollada con **Laravel**, siguiendo buenas pr�
 - PHP 8.2
 - MySQL o PostgreSQL
 - Docker
-- Laravel Sail (opcional para entorno local)
 - PHPUnit
 
 ---
@@ -32,16 +31,13 @@ Este proyecto es una API REST desarrollada con **Laravel**, siguiendo buenas pr�
 ```
 app/
 ├── Http/
-│   ├── Controllers/         # Controladores de cada módulo
-│   ├── Requests/            # FormRequest con validaciones
-│   └── Resources/           # Formato de salida consistente
-├── Models/                  # Modelos Eloquent
-├── Services/                # Lógica de negocio reutilizable
-├── Helpers/                 # Funciones comunes
+│   ├── Controllers/
+│   └── Requests/
+├── Models/
+├── Services/
+├── Traits/
 routes/
-├── api.php                 # Rutas de la API REST
-config/
-└── lendify.php             # Configuración personalizada (si aplica)
+└── api.php
 ```
 
 ---
@@ -55,7 +51,7 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-Configura tus variables de entorno en `.env`, por ejemplo:
+Edita `.env` con tus datos de conexión:
 
 ```env
 DB_CONNECTION=mysql
@@ -78,146 +74,99 @@ composer install
 php artisan migrate --seed
 ```
 
-### 4. Levantar el servidor
+### 4. Levantar servidor
 
 ```bash
 php artisan serve
 ```
 
-La app correrá en `http://localhost:8000`
+Accede desde: `http://localhost:8000`
 
 ---
 
-## 🚧 Docker
+## ✅ Testing
 
-Para entornos productivos o pruebas integradas:
+### Configuración
+
+Copia tu entorno base:
 
 ```bash
-docker compose up --build
+cp .env .env.testing
 ```
 
-Revisa que tu archivo `Dockerfile` y `docker-compose.yml` estén correctamente configurados.
-
----
-
-## 🌐 Documentación de la API
-
-Toda la API está documentada en una colección **Postman** organizada por módulos:
-
-- Autenticación (si aplica)
-- Usuarios
-- Libros
-- Préstamos
-- Devoluciones
-
-### 🔗 Importar la colección
-
-Puedes importar el archivo `docs/lendify-api.postman_collection.json` en Postman.
-
-La variable global `{{APP_URL}}` debe apuntar a tu backend:
+En `.env.testing`, asegúrate de usar una base de datos separada (recomendado SQLite para velocidad):
 
 ```env
-APP_URL=http://localhost:8000
+DB_CONNECTION=sqlite
+DB_DATABASE=:memory:
 ```
 
----
-
-## 🎓 Buenas Prácticas Aplicadas
-
-### 🔒 Seguridad
-
-- Validaciones estrictas con `FormRequest`
-- Protección CSRF (excepto en API si se configura como `stateless`)
-- Manejo de errores con respuestas consistentes
-
-### ✅ Validaciones
-
-Todos los endpoints están protegidos por clases `FormRequest`, que contienen las reglas de validación centralizadas y reutilizables.
-
-### 📊 Formato de Respuesta
-
-La estructura estandarizada de las respuestas es:
-
-```json
-{
-  "success": true,
-  "code": 200,
-  "message": "Books list",
-  "data": [...]
-}
-```
-
-En errores:
-
-```json
-{
-  "success": false,
-  "code": 422,
-  "message": "Validation failed",
-  "data": {
-    "title": ["The title field is required."]
-  }
-}
-```
-
-### 🧳 Pruebas
-
-Se utilizan pruebas unitarias con PHPUnit:
+### Ejecutar pruebas
 
 ```bash
 php artisan test
 ```
 
-- Pruebas en controllers, servicios y helpers
-- Factories y seeders para generar datos falsos
+Esto ejecutará todas las pruebas de `Feature` y `Unit`, usando una base en memoria y datos falsos mediante factories y seeders.
+
+---
+
+## 🐳 Docker (opcional)
+
+El proyecto incluye archivos listos para Docker:
+
+```bash
+docker compose up --build
+```
+
+Ideal para entornos controlados o producción. Puedes personalizar el `docker-compose.yml` para apuntar a producción si lo necesitas.
+
+---
+
+## ☁️ Despliegue en AWS (referencia)
+
+Este sistema fue desplegado en un entorno productivo utilizando un servidor **EC2 de AWS**, configurado con:
+
+- Amazon Linux
+- Docker
+- MySQL como servicio gestionado (RDS)
+- **NGINX** como reverse proxy apuntando al backend
+- **Certbot** para certificado SSL con Let's Encrypt
+- **RDS** base de datos MySQL en AWS
+
+
+
+---
+
+## 🌐 Documentación de la API
+
+Importa el archivo Postman disponible en `docs/lendify-api.postman_collection.json`.
+
+Variable global: `{{APP_URL}}` → `http://localhost:8000` o tu dominio
 
 ---
 
 ## 📊 Endpoints Principales
 
-### 👤 Usuarios
+### Usuarios
 
 - `GET /api/users`
 - `POST /api/users`
 - `PUT /api/users/{id}`
 - `DELETE /api/users/{id}`
 
-### 📖 Libros
+### Libros
 
 - `GET /api/books`
 - `POST /api/books`
 - `PUT /api/books/{id}`
 - `DELETE /api/books/{id}`
 
-### 💼 Préstamos
+### Préstamos
 
-- `POST /api/borrows` - Crear préstamo (acepta array de `book_ids` y `user_id`)
-- `GET /api/borrows` - Ver préstamos activos y devueltos
-
-### 📃 Devoluciones
-
-- `POST /api/returns` - Devolver libros (basado en préstamos pendientes)
+- `POST /api/users/{userId}/borrowings/borrow`
+- `POST /api/users/{userId}/borrowings/return`
+- `GET /api/borrowings/book/{bookId}/current-borrower`
+- `GET /api/borrowings/books/filter`
 
 ---
-
-## 🌟 Contribuciones
-
-Este proyecto puede escalarse para agregar:
-
-- Notificaciones por email
-- Webhooks (para integraciones externas)
-- Historial de actividad
-- Roles y permisos avanzados
-
----
-
-## 🙌 Créditos
-
-Desarrollado con ❤️ por el equipo de Lendify. Para dudas, soporte o contribuciones, por favor abre un issue o contáctanos.
-
----
-
-## 📄 Licencia
-
-Este proyecto está bajo la licencia [MIT](LICENSE).
-
